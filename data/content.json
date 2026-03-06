@@ -1,0 +1,323 @@
+{
+    "settings": {
+        "siteName": "The Bereza Method",
+        "phone": "+44 7704 503507",
+        "phoneLink": "tel:+447704503507",
+        "email": "Runyruny@ukr.net",
+        "whatsapp": "447704503507",
+        "whatsappMessage": "Hi Iryna! I'd like to book a massage session.",
+        "hours": "8am–8pm, 7 days a week",
+        "domain": "theberezamethod.com"
+    },
+    "homepage": {
+        "heroSubtitle": "London's Premier Mobile Massage",
+        "heroTitle": "Clinical Massage Therapy, <em>Delivered</em> to Your Door",
+        "heroDesc": "Outcome-driven deep tissue, Swedish, hot stone, aromatherapy, sensual & sports massage by Iryna Bereza — 10+ years of clinical experience. Same-day availability across Central London.",
+        "heroImage": "/images/iryna-working.jpg",
+        "stats": [
+            {
+                "number": "10+",
+                "label": "Years Clinical Experience"
+            },
+            {
+                "number": "2,000+",
+                "label": "Sessions Delivered"
+            },
+            {
+                "number": "4.9★",
+                "label": "Client Rating"
+            },
+            {
+                "number": "200+",
+                "label": "Five-Star Reviews"
+            }
+        ]
+    },
+    "about": {
+        "title": "Meet Iryna Bereza",
+        "subtitle": "Founder & Lead Therapist",
+        "bio": "Iryna Bereza is the founder and lead therapist of The Bereza Method. With over 10 years of clinical experience, she has developed a unique approach that combines evidence-based physiotherapy techniques with intuitive bodywork.",
+        "bio2": "Originally trained in Ukraine and further certified in London, Iryna holds qualifications in deep tissue massage, sports massage, Swedish massage, aromatherapy, and energy-based therapies. She is DBS-checked and fully insured.",
+        "portraitImage": "/images/iryna-portrait-closeup.jpg",
+        "fullImage": "/images/iryna-portrait-full.jpg",
+        "credentials": [
+            "VTCT Level 3 Diploma in Massage Therapy",
+            "Sports Massage Qualification",
+            "Aromatherapy Certification",
+            "DBS Checked & Fully Insured",
+            "10+ Years Clinical Experience"
+        ]
+    },
+    "services": [
+        {
+            "id": "deep-tissue",
+            "name": "Deep Tissue Massage",
+            "slug": "deep-tissue-massage-london",
+            "price30": "£45",
+            "price60": "£65",
+            "price90": "£90",
+            "price120": "£120",
+            "shortDesc": "Chronic pain relief. Targets neck, back & shoulder tension from desk work.",
+            "image": "/images/deep-tissue.png"
+        },
+        {
+            "id": "swedish",
+            "name": "Swedish Massage",
+            "slug": "swedish-massage-london",
+            "price30": "£35",
+            "price60": "£55",
+            "price90": "£75",
+            "price120": "£100",
+            "shortDesc": "Full-body stress relief, nervous system reset. Better sleep.",
+            "image": "/images/swedish.png"
+        },
+        {
+            "id": "hot-stone",
+            "name": "Hot Stone Massage",
+            "slug": "hot-stone-massage-london",
+            "price30": "£50",
+            "price60": "£70",
+            "price90": "£95",
+            "price120": "£125",
+            "shortDesc": "Heated volcanic basalt stones. Deep warmth & muscle release.",
+            "image": "/images/hot-stone.png"
+        },
+        {
+            "id": "aromatherapy",
+            "name": "Aromatherapy Massage",
+            "slug": "aromatherapy-massage-london",
+            "price30": "£45",
+            "price60": "£65",
+            "price90": "£90",
+            "price120": "£120",
+            "shortDesc": "Organic essential oils. Anxiety, burnout & emotional fatigue.",
+            "image": "/images/aromatherapy.jpg"
+        },
+        {
+            "id": "sensual",
+            "name": "Sensual Massage",
+            "slug": "sensual-massage-london",
+            "price30": "—",
+            "price60": "£120",
+            "price90": "£160",
+            "price120": "£200",
+            "shortDesc": "Deep relaxation, body awareness, emotional connection.",
+            "image": "/images/sensual.png"
+        },
+        {
+            "id": "divine-alignment",
+            "name": "Massage with Divine Alignment",
+            "slug": "divine-alignment-massage-london",
+            "price30": "—",
+            "price60": "£80",
+            "price90": "£110",
+            "price120": "£140",
+            "shortDesc": "Body, mind & spirit harmony. Energy balancing & grounding.",
+            "image": "/images/divine-alignment.png"
+        },
+        {
+            "id": "sports",
+            "name": "Sports Recovery Massage",
+            "slug": "sports-massage-london",
+            "price30": "£45",
+            "price60": "£65",
+            "price90": "£90",
+            "price120": "£120",
+            "shortDesc": "Athletic recovery. Pre/post event muscle repair.",
+            "image": "/images/sports.jpg"
+        },
+        {
+            "id": "couples",
+            "name": "Couples Massage",
+            "slug": "couples-massage-london",
+            "price30": "—",
+            "price60": "£110",
+            "price90": "£160",
+            "price120": "£220",
+            "shortDesc": "Two therapists, two tables. Shared luxury experience.",
+            "image": "/images/couples.jpg"
+        },
+        {
+            "id": "lymphatic",
+            "name": "Lymphatic Drainage Massage",
+            "slug": "lymphatic-drainage-london",
+            "price30": "£40",
+            "price60": "£55",
+            "price90": "£80",
+            "price120": "£110",
+            "shortDesc": "Gentle detox. Reduces swelling & boosts immunity.",
+            "image": "/images/lymphatic.png"
+        }
+    ],
+    "faq": [
+        {
+            "q": "What happens during my first massage session?",
+            "a": "Your therapist arrives with a professional massage table, premium organic oils, and fresh linens. After a 5-10 minute consultation about your health history and goals, you undress to your comfort level in private. The treatment lasts the full booked duration. Afterwards, you receive personalised aftercare recommendations."
+        },
+        {
+            "q": "Is it safe having a therapist come to my home?",
+            "a": "Yes. Iryna Bereza is DBS-checked, fully insured with professional indemnity coverage, and has 10+ years of clinical experience. Professional boundaries are maintained without exception."
+        },
+        {
+            "q": "Can I book a same-day massage in London?",
+            "a": "Yes. Same-day appointments are available 7 days a week across Central London. Book before 2pm for best same-day availability. Hours are 8am to 8pm daily."
+        },
+        {
+            "q": "How much does mobile massage cost in London?",
+            "a": "30-minute sessions start from £35, 1-hour sessions from £55, 90-minute sessions from £75, and 2-hour sessions from £100. All prices include travel within Central London."
+        },
+        {
+            "q": "What areas of London do you serve?",
+            "a": "We serve all Central London postcodes including Kensington, Chelsea, Mayfair, Knightsbridge, Paddington, Canary Wharf, Notting Hill, Soho, City of London, and more."
+        },
+        {
+            "q": "Does deep tissue massage hurt?",
+            "a": "Deep tissue work involves firm pressure that may produce moments of productive discomfort. It should never feel sharp or unbearable. Pressure is always negotiated."
+        },
+        {
+            "q": "Do you have two therapists for couples massage?",
+            "a": "Yes. The Bereza Method has two fully qualified, DBS-checked therapists. For couples massage, both arrive together. Each person receives a personalised treatment."
+        },
+        {
+            "q": "What are your working hours?",
+            "a": "We are available 7 days a week, 8am to 8pm."
+        },
+        {
+            "q": "What should I wear during the massage?",
+            "a": "Undress to your comfort level. You are covered by a professional drape at all times."
+        },
+        {
+            "q": "How often should I book a massage?",
+            "a": "For stress management: fortnightly. For chronic pain: weekly for 3-4 weeks then fortnightly. For sports recovery: based on training schedule."
+        },
+        {
+            "q": "What is the cancellation policy?",
+            "a": "12+ hours before: full refund. Within 12 hours: 50% charge. No-shows: charged in full."
+        },
+        {
+            "q": "Can you come to my hotel?",
+            "a": "Absolutely. We regularly deliver massage treatments in hotels and serviced apartments across Central London."
+        },
+        {
+            "q": "What are the boundaries for sensual massage?",
+            "a": "Sensual massage is a professional therapeutic service focused on deep relaxation and body awareness. Professional boundaries are discussed before the session and respected throughout."
+        },
+        {
+            "q": "Is divine alignment massage a religious practice?",
+            "a": "No. It is a holistic wellness treatment accessible to all beliefs and backgrounds."
+        },
+        {
+            "q": "Do you come to Paddington?",
+            "a": "Yes. We cover all of Paddington W2, Bayswater, and surrounding areas."
+        }
+    ],
+    "reviews": [
+        {
+            "name": "James C.",
+            "location": "Kensington · Deep Tissue",
+            "text": "Iryna completely transformed my chronic neck pain after just two sessions."
+        },
+        {
+            "name": "Sarah H.",
+            "location": "Mayfair · Hot Stone",
+            "text": "Best massage I've ever had in London. Absolute heaven."
+        },
+        {
+            "name": "Robert T.",
+            "location": "Chelsea · Couples",
+            "text": "Two therapists arrived perfectly on time. Unforgettable experience."
+        },
+        {
+            "name": "Emma L.",
+            "location": "Paddington · Swedish",
+            "text": "My sleep has improved dramatically since starting regular sessions."
+        },
+        {
+            "name": "David M.",
+            "location": "Canary Wharf · Deep Tissue",
+            "text": "Chronic shoulder pain fixed in three sessions."
+        },
+        {
+            "name": "Priya K.",
+            "location": "Knightsbridge · Aromatherapy",
+            "text": "The aromatherapy massage was exactly what I needed for my stress."
+        },
+        {
+            "name": "Marcus W.",
+            "location": "Soho · Sports",
+            "text": "Essential for my marathon training recovery."
+        },
+        {
+            "name": "Olivia S.",
+            "location": "Notting Hill · Sensual",
+            "text": "Very professional. Left feeling deeply relaxed and centered."
+        },
+        {
+            "name": "Thomas R.",
+            "location": "Kensington · Divine Alignment",
+            "text": "Transformative. A profound sense of peace."
+        }
+    ],
+    "areas": [
+        {
+            "slug": "massage-therapist-kensington",
+            "name": "Kensington",
+            "postcode": "W8",
+            "nearby": "Chelsea, Knightsbridge, Notting Hill"
+        },
+        {
+            "slug": "massage-therapist-chelsea",
+            "name": "Chelsea",
+            "postcode": "SW3",
+            "nearby": "Kensington, Knightsbridge, South Kensington"
+        },
+        {
+            "slug": "massage-therapist-mayfair",
+            "name": "Mayfair",
+            "postcode": "W1",
+            "nearby": "Soho, Paddington, Knightsbridge"
+        },
+        {
+            "slug": "massage-therapist-paddington",
+            "name": "Paddington",
+            "postcode": "W2",
+            "nearby": "Mayfair, Notting Hill, Marylebone"
+        },
+        {
+            "slug": "massage-therapist-canary-wharf",
+            "name": "Canary Wharf",
+            "postcode": "E14",
+            "nearby": "City of London, Shoreditch"
+        },
+        {
+            "slug": "massage-therapist-knightsbridge",
+            "name": "Knightsbridge",
+            "postcode": "SW1/SW7",
+            "nearby": "Kensington, Chelsea, Mayfair"
+        },
+        {
+            "slug": "massage-therapist-notting-hill",
+            "name": "Notting Hill",
+            "postcode": "W11",
+            "nearby": "Kensington, Paddington, Mayfair"
+        },
+        {
+            "slug": "massage-therapist-soho",
+            "name": "Soho",
+            "postcode": "W1",
+            "nearby": "Mayfair, Paddington, City of London"
+        },
+        {
+            "slug": "massage-therapist-city-of-london",
+            "name": "City of London",
+            "postcode": "EC1-EC4",
+            "nearby": "Soho, Canary Wharf, Shoreditch"
+        },
+        {
+            "slug": "massage-therapist-south-kensington",
+            "name": "South Kensington",
+            "postcode": "SW5/SW7",
+            "nearby": "Kensington, Chelsea, Knightsbridge"
+        }
+    ]
+}
