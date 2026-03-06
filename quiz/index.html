@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Find Your Perfect Massage | Free Tension Quiz</title><meta name="description" content="Free 2-minute tension assessment quiz. Get a personalised massage recommendation from Iryna Bereza. The Bereza Method London. No obligation."><link rel="canonical" href="https://theberezamethod.com/quiz/"><link rel="stylesheet" href="/css/global.css">
+</head>
+<body><header class="header" id="header"><div class="header__inner"><a href="/" class="header__logo">The Bereza <span>Method</span></a><button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button><nav class="nav" id="nav"><a href="/about/" class="nav__link">About</a><a href="/services/" class="nav__link">Services</a><a href="/pricing/" class="nav__link">Pricing</a><a href="/areas/massage-therapist-kensington/" class="nav__link">Areas</a><a href="/blog/" class="nav__link">Blog</a><a href="/contact/" class="nav__link">Contact</a><a href="/book/" class="nav__cta">Book Now</a></nav></div></header><section class="page-hero"><div class="container"><p class="subtitle">Free Quiz</p><h1>Find Your Perfect Massage</h1><p>Answer 5 quick questions and get a personalised treatment recommendation.</p></div></section>
+  <section class="section section--white"><div class="container container--narrow">
+    <div id="quiz" class="fade-in">
+      <div id="quizStep1" class="quiz-step">
+        <h2 style="margin-bottom:var(--space-xl);">1. What's your primary concern?</h2>
+        <div class="grid grid--2" style="gap:var(--space-md);">
+          <button class="card quiz-option" onclick="selectAnswer(1,'pain')" style="cursor:pointer;text-align:center;padding:var(--space-xl);"><div style="font-size:2rem;margin-bottom:var(--space-sm);">😖</div><strong>Chronic Pain</strong><p style="font-size:var(--fs-small);color:var(--color-muted);">Neck, back, shoulders</p></button>
+          <button class="card quiz-option" onclick="selectAnswer(1,'stress')" style="cursor:pointer;text-align:center;padding:var(--space-xl);"><div style="font-size:2rem;margin-bottom:var(--space-sm);">😰</div><strong>Stress & Anxiety</strong><p style="font-size:var(--fs-small);color:var(--color-muted);">Can't switch off</p></button>
+          <button class="card quiz-option" onclick="selectAnswer(1,'sports')" style="cursor:pointer;text-align:center;padding:var(--space-xl);"><div style="font-size:2rem;margin-bottom:var(--space-sm);">🏃</div><strong>Sports Recovery</strong><p style="font-size:var(--fs-small);color:var(--color-muted);">Training & competition</p></button>
+          <button class="card quiz-option" onclick="selectAnswer(1,'spiritual')" style="cursor:pointer;text-align:center;padding:var(--space-xl);"><div style="font-size:2rem;margin-bottom:var(--space-sm);">✨</div><strong>Holistic / Spiritual</strong><p style="font-size:var(--fs-small);color:var(--color-muted);">Mind-body balance</p></button>
+          <button class="card quiz-option" onclick="selectAnswer(1,'couple')" style="cursor:pointer;text-align:center;padding:var(--space-xl);"><div style="font-size:2rem;margin-bottom:var(--space-sm);">💕</div><strong>Shared Experience</strong><p style="font-size:var(--fs-small);color:var(--color-muted);">With a partner</p></button>
+          <button class="card quiz-option" onclick="selectAnswer(1,'relaxation')" style="cursor:pointer;text-align:center;padding:var(--space-xl);"><div style="font-size:2rem;margin-bottom:var(--space-sm);">🧘</div><strong>Pure Relaxation</strong><p style="font-size:var(--fs-small);color:var(--color-muted);">Just need to unwind</p></button>
+        </div>
+      </div>
+      <div id="quizResult" style="display:none;text-align:center;">
+        <div style="font-size:4rem;margin-bottom:var(--space-lg);" id="resultIcon">💆</div>
+        <h2 id="resultTitle">Your Perfect Treatment</h2>
+        <p id="resultDesc" style="font-size:var(--fs-body-lg);margin:var(--space-lg) 0;"></p>
+        <p id="resultPrice" style="font-size:1.5rem;font-family:var(--ff-heading);color:var(--color-gold);margin-bottom:var(--space-xl);"></p>
+        <div style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap;">
+          <a href="/book/" class="btn btn--primary btn--lg">Book This Treatment</a>
+          <a href="tel:+447704503507" class="btn btn--outline btn--lg">Call +44 7704 503507</a>
+        </div>
+        <p style="margin-top:var(--space-xl);"><button onclick="resetQuiz()" style="background:none;border:none;color:var(--color-gold);cursor:pointer;font-size:var(--fs-body);">← Take Quiz Again</button></p>
+      </div>
+    </div>
+  </div></section>
+  <script>
+  const recommendations = {
+    pain: {icon:'💆',title:'Deep Tissue Massage',desc:'Based on your answers, deep tissue massage is the ideal treatment. It targets the deeper layers of muscle and fascia to break up adhesions and relieve chronic pain.',price:'From £65 · 60 mins',link:'/services/deep-tissue-massage-london/'},
+    stress: {icon:'🌿',title:'Swedish Massage',desc:'Swedish massage is scientifically proven to reduce cortisol by 31% and boost serotonin. Perfect for stress relief and better sleep.',price:'From £55 · 60 mins',link:'/services/swedish-massage-london/'},
+    sports: {icon:'🏃',title:'Sports Recovery Massage',desc:'Sports massage targets the exact muscle groups under stress from your training. Iryna specialises in pre-event and post-event recovery.',price:'From £65 · 60 mins',link:'/services/sports-massage-london/'},
+    spiritual: {icon:'✨',title:'Massage with Divine Alignment',desc:'This holistic treatment combines physical bodywork with energy balancing for body, mind, and spirit harmony.',price:'From £80 · 60 mins',link:'/services/divine-alignment-massage-london/'},
+    couple: {icon:'💕',title:'Couples Massage',desc:'Two qualified therapists arrive together. Each person chooses their own treatment independently. The ultimate shared experience.',price:'From £110 combined · 60 mins',link:'/services/couples-massage-london/'},
+    relaxation: {icon:'🌸',title:'Aromatherapy Massage',desc:'Organic essential oils combined with therapeutic massage. Scientifically shown to reduce anxiety by 36% more than massage alone.',price:'From £65 · 60 mins',link:'/services/aromatherapy-massage-london/'}
+  };
+  function selectAnswer(step, answer) {
+    const r = recommendations[answer];
+    document.getElementById('quizStep1').style.display = 'none';
+    document.getElementById('quizResult').style.display = 'block';
+    document.getElementById('resultIcon').textContent = r.icon;
+    document.getElementById('resultTitle').textContent = 'We Recommend: ' + r.title;
+    document.getElementById('resultDesc').textContent = r.desc;
+    document.getElementById('resultPrice').textContent = r.price;
+  }
+  function resetQuiz() {
+    document.getElementById('quizStep1').style.display = 'block';
+    document.getElementById('quizResult').style.display = 'none';
+  }
+  </script><footer class="footer"><div class="container"><div class="footer__grid"><div><div class="footer__brand-name">The Bereza <span>Method</span></div><p class="footer__desc">London's premier mobile massage therapy service.</p><p style="margin-top:var(--space-md);"><a href="tel:+447704503507" style="color:var(--color-gold);">+44 7704 503507</a><br><a href="mailto:Runyruny@ukr.net" style="color:var(--color-gold);">Runyruny@ukr.net</a></p></div><div><h4 class="footer__heading">Services</h4><ul class="footer__links"><li><a href="/services/deep-tissue-massage-london/">Deep Tissue</a></li><li><a href="/services/swedish-massage-london/">Swedish</a></li><li><a href="/services/sensual-massage-london/">Sensual</a></li><li><a href="/services/divine-alignment-massage-london/">Divine Alignment</a></li><li><a href="/services/sports-massage-london/">Sports</a></li><li><a href="/services/couples-massage-london/">Couples</a></li></ul></div><div><h4 class="footer__heading">Quick Links</h4><ul class="footer__links"><li><a href="/about/">About</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/book/">Book Online</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/reviews/">Reviews</a></li><li><a href="/quiz/">Free Quiz</a></li></ul></div><div><h4 class="footer__heading">Areas</h4><ul class="footer__links"><li><a href="/areas/massage-therapist-kensington/">Kensington</a></li><li><a href="/areas/massage-therapist-chelsea/">Chelsea</a></li><li><a href="/areas/massage-therapist-mayfair/">Mayfair</a></li><li><a href="/areas/massage-therapist-paddington/">Paddington</a></li><li><a href="/areas/massage-therapist-canary-wharf/">Canary Wharf</a></li></ul></div></div><div class="footer__bottom"><p>&copy; 2026 The Bereza Method. <a href="/terms/">Terms</a> · <a href="/privacy/">Privacy</a></p></div></div></footer><script src="/js/main.js"></script>
+<!-- WhatsApp Float -->
+<a href="https://wa.me/447704503507?text=Hi%20Iryna!%20I'd%20like%20to%20book%20a%20massage%20session." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chat on WhatsApp">
+<svg viewBox="0 0 32 32" width="32" height="32" fill="#fff"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.5 1.132 6.744 3.06 9.372L1.06 31.14l5.964-1.964A15.91 15.91 0 0016.004 32C24.826 32 32 24.826 32 16.004S24.826 0 16.004 0zm9.31 22.602c-.388 1.094-2.278 2.094-3.14 2.168-.786.066-1.746.094-2.82-.178a25.86 25.86 0 01-2.554-.944c-4.494-1.94-7.428-6.47-7.654-6.774-.218-.304-1.788-2.38-1.788-4.538s1.132-3.22 1.534-3.66c.402-.44.876-.55 1.168-.55.146 0 .276.008.394.014.402.018.604.042.87.672.33.786 1.142 2.78 1.242 2.98.1.2.166.432.032.694-.126.27-.19.432-.38.666-.19.234-.4.52-.57.696-.19.196-.39.408-.166.802.224.394.992 1.636 2.13 2.652 1.464 1.306 2.696 1.71 3.078 1.902.382.192.604.16.826-.098.228-.258.974-1.134 1.232-1.524.258-.39.516-.324.87-.194.358.13 2.268 1.068 2.656 1.264.388.196.648.294.744.458.094.16.094.944-.294 2.038z"/></svg>
+</a>
+</body></html>
