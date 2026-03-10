@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
+        "build": "node update-all.mjs && vite build",
         "preview": "vite preview",
         "admin": "node admin-server.js"
     },

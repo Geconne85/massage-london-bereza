@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initFaqAccordion();
     initSmoothScroll();
+    initDivinePopup();
 });
 
 // Header scroll effect
@@ -95,4 +96,40 @@ function initSmoothScroll() {
             }
         });
     });
+}
+
+// ✦ Divine Alignment Premium Popup
+function initDivinePopup() {
+    // Don't show on the Divine Alignment page itself
+    if (window.location.pathname.includes('divine-alignment')) return;
+
+    // Create popup HTML
+    const popup = document.createElement('div');
+    popup.className = 'divine-popup';
+    popup.innerHTML = `
+        <div class="divine-popup__inner">
+            <button class="divine-popup__close" aria-label="Close">&times;</button>
+            <div class="divine-popup__glow"></div>
+            <div class="divine-popup__badge">✦ SIGNATURE EXPERIENCE</div>
+            <h3 class="divine-popup__title">Massage with<br>Divine Alignment</h3>
+            <p class="divine-popup__text">A unique, holistic treatment that works with your physical body and energetic field to restore harmony between body, mind, and spirit. Through therapeutic touch and intuitive energy work, we release physical tension and emotional blocks.</p>
+            <p class="divine-popup__subtext">Grounding & centering ritual · Energy balancing · £200</p>
+            <a href="/book/" class="divine-popup__cta">Book Divine Alignment — £200 →</a>
+        </div>
+    `;
+    document.body.appendChild(popup);
+
+    // Close ONLY with X button — popup stays until user clicks X
+    popup.querySelector('.divine-popup__close').addEventListener('click', () => {
+        popup.classList.remove('show');
+        // Reappear after 2 minutes (120 seconds)
+        setTimeout(() => {
+            popup.classList.add('show');
+        }, 120000);
+    });
+
+    // First show after 20 seconds — then stays until user closes
+    setTimeout(() => {
+        popup.classList.add('show');
+    }, 20000);
 }
