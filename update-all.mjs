@@ -222,4 +222,47 @@ console.log('✓ Services Overview');
 });
 
 console.log('✓ Individual Services');
+
+// ============ SITEMAP GENERATION ============
+console.log('Generating sitemap.xml...');
+function getHtmlRoutes(dir, base = '') {
+    let routes = [];
+    const EXCLUDE = ['node_modules', 'admin', 'dist', '.git', '.vite', 'public'];
+    try {
+        const items = readdirSync(dir);
+        for (const item of items) {
+            if (EXCLUDE.includes(item)) continue;
+            const fullPath = resolve(dir, item);
+            const relPath = base ? `${base}/${item}` : item;
+            if (statSync(fullPath).isDirectory()) {
+                routes = routes.concat(getHtmlRoutes(fullPath, relPath));
+            } else if (item === 'index.html') {
+                routes.push(base ? `/${base}/` : '/');
+            } else if (item.endsWith('.html')) {
+                routes.push(`/${relPath.replace(/\.html$/, '')}/`);
+            }
+        }
+    } catch (e) { }
+    return routes;
+}
+
+const allRoutes = getHtmlRoutes(ROOT);
+if (!existsSync(resolve(ROOT, 'public'))) {
+    mkdirSync(resolve(ROOT, 'public'), { recursive: true });
+}
+
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${allRoutes.map(route => `  <url>
+    <loc>https://massage-london-bereza.vercel.app${route}</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>${route === '/' ? '1.0' : '0.8'}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+
+writeFileSync(resolve(ROOT, 'public', 'sitemap.xml'), sitemapXml);
+console.log('✓ Sitemap generated at public/sitemap.xml');
+
 console.log('Build complete - site updated from content.json');
+
