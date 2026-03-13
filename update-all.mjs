@@ -265,7 +265,7 @@ ${allRoutes.map(route => `  <url>
     <changefreq>weekly</changefreq>
     <priority>${route === '/' ? '1.0' : '0.8'}</priority>
   </url>`).join('\n')}
-</urlset>`;
+</urlset>`.trim();
 
 writeFileSync(resolve(ROOT, 'public', 'sitemap.xml'), sitemapXml);
 console.log('✓ Sitemap generated at public/sitemap.xml');
