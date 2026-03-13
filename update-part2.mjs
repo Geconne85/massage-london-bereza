@@ -11,7 +11,7 @@ const footer = `<footer class="footer"><div class="container"><div class="footer
 const trustBar = `<div class="trust-bar"><div class="trust-bar__inner"><div class="trust-bar__item"><span>✓</span> 10+ Years Experience</div><div class="trust-bar__item"><span>✓</span> Same-Day Available</div><div class="trust-bar__item"><span>✓</span> 8am-8pm Daily</div><div class="trust-bar__item"><span>✓</span> No Travel Fees</div></div></div>`;
 
 function pg(title, desc, canonical, body, schema = '') {
-    return `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>${title}</title>\n  <meta name="description" content="${desc}">\n  <link rel="canonical" href="https://theberezamethod.com${canonical}">\n  <link rel="stylesheet" href="/css/global.css">\n  ${schema}\n</head>\n<body>\n  ${header}\n  ${body}\n  ${footer}\n  <script src="/js/main.js"></script>\n</body>\n</html>`;
+    return `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>${title}</title>\n  <meta name="description" content="${desc}">\n  <link rel="canonical" href="https://massage-london-bereza.vercel.app${canonical}">\n  <link rel="stylesheet" href="/css/global.css">\n  ${schema}\n</head>\n<body>\n  ${header}\n  ${body}\n  ${footer}\n  <script src="/js/main.js"></script>\n</body>\n</html>`;
 }
 
 function servicePage(s) {
@@ -91,7 +91,7 @@ writeFileSync('book/index.html', pg(
       'Time: ' + time + '\\n' +
       'Address/Postcode: ' + address + '\\n' +
       'Notes: ' + (notes || 'None') + '\\n\\n' +
-      'Sent from theberezamethod.com booking form'
+      'Sent from massage-london-bereza.vercel.app booking form'
     );
     window.location.href = 'mailto:${EMAIL}?subject=' + subject + '&body=' + body;
   });

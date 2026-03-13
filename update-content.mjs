@@ -74,7 +74,7 @@ const areaTemplate = (name, slug, postcode, nearby) => `<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mobile Massage Therapist ${name} ${postcode} | The Bereza Method</title>
   <meta name="description" content="Mobile massage therapist in ${name} ${postcode}. Deep tissue from £90/hr, all massages from £120/hr. Same-day home visits 10am-8pm. Iryna Bereza. No travel fee.">
-  <link rel="canonical" href="https://theberezamethod.com/areas/${slug}/">
+  <link rel="canonical" href="https://massage-london-bereza.vercel.app/areas/${slug}/">
   <link rel="stylesheet" href="/css/global.css">
 </head>
 <body>
@@ -136,7 +136,7 @@ if (existsSync(sitemapFile)) {
     let sitemap = readFileSync(sitemapFile, 'utf-8');
     if (!sitemap.includes('massage-therapist-shoreditch')) {
         sitemap = sitemap.replace('</urlset>',
-            `  <url><loc>https://theberezamethod.com/areas/massage-therapist-shoreditch/</loc></url>\n  <url><loc>https://theberezamethod.com/areas/massage-therapist-marylebone/</loc></url>\n</urlset>`);
+            `  <url><loc>https://massage-london-bereza.vercel.app/areas/massage-therapist-shoreditch/</loc></url>\n  <url><loc>https://massage-london-bereza.vercel.app/areas/massage-therapist-marylebone/</loc></url>\n</urlset>`);
         writeFileSync(sitemapFile, sitemap);
         console.log('✅ Updated sitemap.xml');
     }

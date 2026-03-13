@@ -9,7 +9,7 @@ const H = `<header class="header" id="header"><div class="header__inner"><a href
 const F = `<footer class="footer"><div class="container"><div class="footer__grid"><div><div class="footer__brand-name">The Bereza <span>Method</span></div><p class="footer__desc">London's premier mobile massage therapy service.</p><p style="margin-top:var(--space-md);"><a href="${PL}" style="color:var(--color-gold);">${PHONE}</a><br><a href="${EL}" style="color:var(--color-gold);">${EMAIL}</a></p></div><div><h4 class="footer__heading">Services</h4><ul class="footer__links"><li><a href="/services/deep-tissue-massage-london/">Deep Tissue</a></li><li><a href="/services/swedish-massage-london/">Swedish</a></li><li><a href="/services/sensual-massage-london/">Sensual</a></li><li><a href="/services/divine-alignment-massage-london/">Divine Alignment</a></li><li><a href="/services/sports-massage-london/">Sports</a></li><li><a href="/services/couples-massage-london/">Couples</a></li></ul></div><div><h4 class="footer__heading">Quick Links</h4><ul class="footer__links"><li><a href="/about/">About</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/book/">Book Online</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/reviews/">Reviews</a></li><li><a href="/quiz/">Free Quiz</a></li></ul></div><div><h4 class="footer__heading">Areas</h4><ul class="footer__links"><li><a href="/areas/massage-therapist-kensington/">Kensington</a></li><li><a href="/areas/massage-therapist-chelsea/">Chelsea</a></li><li><a href="/areas/massage-therapist-mayfair/">Mayfair</a></li><li><a href="/areas/massage-therapist-paddington/">Paddington</a></li><li><a href="/areas/massage-therapist-canary-wharf/">Canary Wharf</a></li></ul></div></div><div class="footer__bottom"><p>&copy; 2026 The Bereza Method. <a href="/terms/">Terms</a> · <a href="/privacy/">Privacy</a></p></div></div></footer>`;
 const TB = `<div class="trust-bar"><div class="trust-bar__inner"><div class="trust-bar__item"><span>✓</span> 10+ Years Experience</div><div class="trust-bar__item"><span>✓</span> Same-Day Available</div><div class="trust-bar__item"><span>✓</span> 8am-8pm Daily</div><div class="trust-bar__item"><span>✓</span> No Travel Fees</div></div></div>`;
 
-function pg(t, d, c, b, s = '') { return `<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">\n<title>${t}</title><meta name="description" content="${d}"><link rel="canonical" href="https://theberezamethod.com${c}"><link rel="stylesheet" href="/css/global.css">${s}\n</head>\n<body>${H}${b}${F}<script src="/js/main.js"></script></body></html>`; }
+function pg(t, d, c, b, s = '') { return `<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">\n<title>${t}</title><meta name="description" content="${d}"><link rel="canonical" href="https://massage-london-bereza.vercel.app${c}"><link rel="stylesheet" href="/css/global.css">${s}\n</head>\n<body>${H}${b}${F}<script src="/js/main.js"></script></body></html>`; }
 
 // Remove old area directories
 try { rmSync('areas', { recursive: true, force: true }); } catch (e) { }
@@ -95,40 +95,40 @@ for (const [slug, seo] of Object.entries(blogSEO)) {
 // SITEMAP
 writeFileSync('public/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://theberezamethod.com/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://theberezamethod.com/about</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://theberezamethod.com/services</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://theberezamethod.com/services/deep-tissue-massage-london</loc><priority>0.9</priority></url>
-  <url><loc>https://theberezamethod.com/services/swedish-massage-london</loc><priority>0.9</priority></url>
-  <url><loc>https://theberezamethod.com/services/hot-stone-massage-london</loc><priority>0.9</priority></url>
-  <url><loc>https://theberezamethod.com/services/aromatherapy-massage-london</loc><priority>0.9</priority></url>
-  <url><loc>https://theberezamethod.com/services/couples-massage-london</loc><priority>0.9</priority></url>
-  <url><loc>https://theberezamethod.com/services/sports-massage-london</loc><priority>0.9</priority></url>
-  <url><loc>https://theberezamethod.com/services/lymphatic-drainage-london</loc><priority>0.8</priority></url>
-  <url><loc>https://theberezamethod.com/services/sensual-massage-london</loc><priority>0.9</priority></url>
-  <url><loc>https://theberezamethod.com/services/divine-alignment-massage-london</loc><priority>0.8</priority></url>
-  <url><loc>https://theberezamethod.com/pricing</loc><priority>0.8</priority></url>
-  <url><loc>https://theberezamethod.com/booking</loc><priority>0.9</priority></url>
-  <url><loc>https://theberezamethod.com/faq</loc><priority>0.7</priority></url>
-  <url><loc>https://theberezamethod.com/contact</loc><priority>0.7</priority></url>
-  <url><loc>https://theberezamethod.com/reviews</loc><priority>0.7</priority></url>
-  <url><loc>https://theberezamethod.com/quiz</loc><priority>0.7</priority></url>
-  <url><loc>https://theberezamethod.com/blog</loc><priority>0.7</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://theberezamethod.com/gift-vouchers</loc><priority>0.7</priority></url>
-  ${areas.map(a => `<url><loc>https://theberezamethod.com/areas/${a.slug}</loc><priority>0.7</priority></url>`).join('\n  ')}
-  <url><loc>https://theberezamethod.com/terms</loc><priority>0.3</priority></url>
-  <url><loc>https://theberezamethod.com/privacy</loc><priority>0.3</priority></url>
-  <url><loc>https://theberezamethod.com/blog/deep-tissue-massage-for-london-desk-workers</loc><priority>0.7</priority></url>
-  <url><loc>https://theberezamethod.com/blog/london-marathon-recovery-guide</loc><priority>0.7</priority></url>
-  <url><loc>https://theberezamethod.com/blog/massage-for-anxiety-and-stress-relief</loc><priority>0.7</priority></url>
-  <url><loc>https://theberezamethod.com/blog/how-often-should-you-get-a-massage</loc><priority>0.7</priority></url>
-  <url><loc>https://theberezamethod.com/blog/mobile-massage-vs-spa-massage-london</loc><priority>0.7</priority></url>
-  <url><loc>https://theberezamethod.com/blog/what-to-expect-first-massage</loc><priority>0.7</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://massage-london-bereza.vercel.app/about</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://massage-london-bereza.vercel.app/services</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://massage-london-bereza.vercel.app/services/deep-tissue-massage-london</loc><priority>0.9</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/services/swedish-massage-london</loc><priority>0.9</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/services/hot-stone-massage-london</loc><priority>0.9</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/services/aromatherapy-massage-london</loc><priority>0.9</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/services/couples-massage-london</loc><priority>0.9</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/services/sports-massage-london</loc><priority>0.9</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/services/lymphatic-drainage-london</loc><priority>0.8</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/services/sensual-massage-london</loc><priority>0.9</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/services/divine-alignment-massage-london</loc><priority>0.8</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/pricing</loc><priority>0.8</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/booking</loc><priority>0.9</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/faq</loc><priority>0.7</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/contact</loc><priority>0.7</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/reviews</loc><priority>0.7</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/quiz</loc><priority>0.7</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/blog</loc><priority>0.7</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://massage-london-bereza.vercel.app/gift-vouchers</loc><priority>0.7</priority></url>
+  ${areas.map(a => `<url><loc>https://massage-london-bereza.vercel.app/areas/${a.slug}</loc><priority>0.7</priority></url>`).join('\n  ')}
+  <url><loc>https://massage-london-bereza.vercel.app/terms</loc><priority>0.3</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/privacy</loc><priority>0.3</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/blog/deep-tissue-massage-for-london-desk-workers</loc><priority>0.7</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/blog/london-marathon-recovery-guide</loc><priority>0.7</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/blog/massage-for-anxiety-and-stress-relief</loc><priority>0.7</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/blog/how-often-should-you-get-a-massage</loc><priority>0.7</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/blog/mobile-massage-vs-spa-massage-london</loc><priority>0.7</priority></url>
+  <url><loc>https://massage-london-bereza.vercel.app/blog/what-to-expect-first-massage</loc><priority>0.7</priority></url>
 </urlset>`);
 console.log('✓ Sitemap');
 
 // ROBOTS.TXT
-writeFileSync('public/robots.txt', `User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\nSitemap: https://theberezamethod.com/sitemap.xml`);
+writeFileSync('public/robots.txt', `User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\nSitemap: https://massage-london-bereza.vercel.app/sitemap.xml`);
 console.log('✓ Robots.txt');
 
 console.log('Part 4 complete!');

@@ -3,7 +3,7 @@ import { writeFileSync, mkdirSync } from 'fs';
 import { resolve } from 'path';
 
 const header = `<header class="header" id="header"><div class="header__inner"><a href="/" class="header__logo">The Bereza <span>Method</span></a><button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button><nav class="nav" id="nav"><a href="/about/" class="nav__link">About</a><a href="/services/deep-tissue-massage-london/" class="nav__link">Services</a><a href="/pricing/" class="nav__link">Pricing</a><a href="/areas/massage-therapist-soho/" class="nav__link">Areas</a><a href="/blog/" class="nav__link">Blog</a><a href="/contact/" class="nav__link">Contact</a><a href="/book/" class="nav__cta">Book Now</a></nav></div></header>`;
-const footer = `<footer class="footer"><div class="container"><div class="footer__grid"><div><div class="footer__brand-name">The Bereza <span>Method</span></div><p class="footer__desc">London's premier mobile massage therapy service.</p></div><div><h4 class="footer__heading">Services</h4><ul class="footer__links"><li><a href="/services/deep-tissue-massage-london/">Deep Tissue</a></li><li><a href="/services/swedish-massage-london/">Swedish</a></li><li><a href="/services/hot-stone-massage-london/">Hot Stone</a></li><li><a href="/services/aromatherapy-massage-london/">Aromatherapy</a></li><li><a href="/services/sports-massage-london/">Sports</a></li><li><a href="/services/couples-massage-london/">Couples</a></li></ul></div><div><h4 class="footer__heading">Quick Links</h4><ul class="footer__links"><li><a href="/about/">About</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/book/">Book Online</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/reviews/">Reviews</a></li></ul></div><div><h4 class="footer__heading">Areas</h4><ul class="footer__links"><li><a href="/areas/massage-therapist-soho/">Soho</a></li><li><a href="/areas/massage-therapist-mayfair/">Mayfair</a></li><li><a href="/areas/massage-therapist-city-of-london/">City of London</a></li></ul></div></div><div class="footer__bottom"><p>&copy; 2026 The Bereza Method. All rights reserved.</p><p>hello@theberezamethod.com</p></div></div></footer>`;
+const footer = `<footer class="footer"><div class="container"><div class="footer__grid"><div><div class="footer__brand-name">The Bereza <span>Method</span></div><p class="footer__desc">London's premier mobile massage therapy service.</p></div><div><h4 class="footer__heading">Services</h4><ul class="footer__links"><li><a href="/services/deep-tissue-massage-london/">Deep Tissue</a></li><li><a href="/services/swedish-massage-london/">Swedish</a></li><li><a href="/services/hot-stone-massage-london/">Hot Stone</a></li><li><a href="/services/aromatherapy-massage-london/">Aromatherapy</a></li><li><a href="/services/sports-massage-london/">Sports</a></li><li><a href="/services/couples-massage-london/">Couples</a></li></ul></div><div><h4 class="footer__heading">Quick Links</h4><ul class="footer__links"><li><a href="/about/">About</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/book/">Book Online</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/reviews/">Reviews</a></li></ul></div><div><h4 class="footer__heading">Areas</h4><ul class="footer__links"><li><a href="/areas/massage-therapist-soho/">Soho</a></li><li><a href="/areas/massage-therapist-mayfair/">Mayfair</a></li><li><a href="/areas/massage-therapist-city-of-london/">City of London</a></li></ul></div></div><div class="footer__bottom"><p>&copy; 2026 The Bereza Method. All rights reserved.</p><p>hello@massage-london-bereza.vercel.app</p></div></div></footer>`;
 
 const posts = [
     {
@@ -267,7 +267,7 @@ const blogIndex = `<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Massage Therapy Blog London | The Bereza Method</title>
   <meta name="description" content="Expert massage therapy articles by Iryna Bereza. Guides on deep tissue massage, sports recovery, stress relief, and wellness for London professionals.">
-  <link rel="canonical" href="https://theberezamethod.com/blog/">
+  <link rel="canonical" href="https://massage-london-bereza.vercel.app/blog/">
   <link rel="stylesheet" href="/css/global.css">
 </head>
 <body>
@@ -325,7 +325,7 @@ posts.forEach(p => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${p.title} | The Bereza Method</title>
   <meta name="description" content="${p.metaDesc}">
-  <link rel="canonical" href="https://theberezamethod.com/blog/${p.slug}/">
+  <link rel="canonical" href="https://massage-london-bereza.vercel.app/blog/${p.slug}/">
   <link rel="stylesheet" href="/css/global.css">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BlogPosting","headline":"${p.title}","author":{"@type":"Person","name":"Iryna Bereza"},"publisher":{"@type":"Organization","name":"The Bereza Method"},"datePublished":"2026-${p.date.includes('March') ? '03' : p.date.includes('Feb') ? '02' : '01'}-01","description":"${p.metaDesc}"}
