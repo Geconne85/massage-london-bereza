@@ -59,7 +59,7 @@ function page(title, desc, canonical, body, schema = '') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
   <meta name="description" content="${desc}">
-  <link rel="canonical" href="https://theberezamethod.com${canonical}">
+  <link rel="canonical" href="https://massage-london-bereza.vercel.app${canonical}">
   <link rel="stylesheet" href="/css/global.css">
   ${themeStyles}
   ${schema}
@@ -260,7 +260,7 @@ if (!existsSync(resolve(ROOT, 'public'))) {
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allRoutes.map(route => `  <url>
-    <loc>https://theberezamethod.com${route}</loc>
+    <loc>https://massage-london-bereza.vercel.app${route}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${route === '/' ? '1.0' : '0.8'}</priority>
