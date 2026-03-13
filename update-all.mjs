@@ -247,6 +247,12 @@ function getHtmlRoutes(dir, base = '') {
 }
 
 const allRoutes = getHtmlRoutes(ROOT);
+
+if (allRoutes.length === 0) {
+    console.error('ERROR: No HTML routes found! Sitemap generation aborted to prevent empty XML.');
+    process.exit(1);
+}
+
 if (!existsSync(resolve(ROOT, 'public'))) {
     mkdirSync(resolve(ROOT, 'public'), { recursive: true });
 }
@@ -254,7 +260,7 @@ if (!existsSync(resolve(ROOT, 'public'))) {
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allRoutes.map(route => `  <url>
-    <loc>https://massage-london-bereza.vercel.app${route}</loc>
+    <loc>https://theberezamethod.com${route}</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${route === '/' ? '1.0' : '0.8'}</priority>
