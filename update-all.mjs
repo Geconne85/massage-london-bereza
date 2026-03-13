@@ -1,5 +1,5 @@
 // Master update script - updates all pages from data/content.json
-import { writeFileSync, mkdirSync, readFileSync, readdirSync, existsSync } from 'fs';
+import { writeFileSync, mkdirSync, readFileSync, readdirSync, existsSync, statSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
