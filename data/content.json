@@ -54,8 +54,10 @@
       "name": "Deep Tissue Massage",
       "slug": "deep-tissue-massage-london",
       "price30": "—",
-      "price60": "£90",
-      "shortDesc": "Targeted body-part relief. Neck, back & shoulder tension from desk work. From £90/hr.",
+      "price60": "£120",
+      "price90": "£180",
+      "price120": "£240",
+      "shortDesc": "Targeted body-part relief. Neck, back & shoulder tension from desk work. From £120/hr.",
       "image": "/images/Firefly_GeminiFlash_1--Deep-Tissue-Massage-----Male-client_PROMPT-_Use--REFERENCE-PHOTO-OF-IRYNA--as-STRICT-417570.png"
     },
     {
@@ -97,10 +99,9 @@
       "slug": "sensual-massage-london",
       "price30": "—",
       "price60": "£200",
-      "price90": "£200",
-      "price120": "£200",
-      "fixedPrice": "£200 — Fixed Price (No Fixed Time)",
-      "shortDesc": "Deep relaxation, body awareness, emotional connection. Fixed price: £200.",
+      "price90": "£300",
+      "price120": "£400",
+      "shortDesc": "Deep relaxation, body awareness, emotional connection. From £200 (1hr) · £400 (2hrs).",
       "image": "/images/Firefly_Gemini-Flash_Professional-massage-therapist-woman-in-elegant-white-dress-uniform-performing-slow-g-417570.png"
     },
     {

@@ -20,13 +20,20 @@
   body { font-family: var(--font-body); background-color: var(--color-bg); color: var(--color-text); }
   h1, h2, h3, h4, .subtitle { font-family: var(--font-heading); }
   .btn--primary { background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark)); color: var(--color-bg); }
+  @keyframes heroPan {
+    0%   { background-position: 30% 40%; background-size: 115%; }
+    25%  { background-position: 60% 30%; background-size: 110%; }
+    50%  { background-position: 70% 60%; background-size: 120%; }
+    75%  { background-position: 40% 70%; background-size: 112%; }
+    100% { background-position: 30% 40%; background-size: 115%; }
+  }
 </style>
   
 </head>
 <body>
   <header class="header" id="header"><div class="header__inner"><a href="/" class="header__logo">The <span>Bereza</span></a><button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button><nav class="nav" id="nav"><a href="/about/" class="nav__link">About</a><a href="/services/" class="nav__link">Services</a><a href="/pricing/" class="nav__link">Pricing</a><a href="/areas/massage-therapist-kensington/" class="nav__link">Areas</a><a href="/blog/" class="nav__link">Blog</a><a href="/contact/" class="nav__link">Contact</a><a href="/book/" class="nav__cta">Book Now</a></nav></div></header>
   
-  <section class="hero" style="background-image: linear-gradient(rgba(9,7,15,0.65), rgba(9,7,15,0.65)), url('/images/hero-massage-3d.png'); background-size: cover; background-position: center;">
+  <section class="hero" style="background-image: linear-gradient(rgba(9,7,15,0.55), rgba(9,7,15,0.55)), url('/images/hero-massage-animated.png'); background-size: 115%; background-position: 30% 40%; animation: heroPan 20s ease-in-out infinite alternate;">
     <div class="container">
       <p class="subtitle">✦ London's Premier Mobile Massage</p>
       <h1>Clinical Massage Therapy, <em>Delivered</em> to Your Door</h1>
@@ -59,7 +66,7 @@
         <a href="/services/deep-tissue-massage-london/" class="card fade-in">
             <img src="/images/Firefly_GeminiFlash_1--Deep-Tissue-Massage-----Male-client_PROMPT-_Use--REFERENCE-PHOTO-OF-IRYNA--as-STRICT-417570.png" alt="Deep Tissue Massage" class="card__image">
             <h3 class="card__title">Deep Tissue Massage</h3>
-            <p class="card__text">Targeted body-part relief. Neck, back &amp; shoulder tension from desk work. From £90/hr.</p>
+            <p class="card__text">Targeted body-part relief. Neck, back &amp; shoulder tension from desk work. From £120/hr.</p>
         </a>
         <a href="/services/swedish-massage-london/" class="card fade-in">
             <img src="/images/Firefly_Gemini-Flash_Professional-massage-therapist-woman-in-elegant-white-dress-uniform-performing-a-long-417570.png" alt="Swedish Massage" class="card__image">
@@ -79,7 +86,7 @@
         <a href="/services/sensual-massage-london/" class="card fade-in">
             <img src="/images/Firefly_Gemini-Flash_Professional-massage-therapist-woman-in-elegant-white-dress-uniform-performing-slow-g-417570.png" alt="Sensual Massage" class="card__image">
             <h3 class="card__title">Sensual Massage</h3>
-            <p class="card__text">Deep relaxation, body awareness, emotional connection. Fixed price: £200.</p>
+            <p class="card__text">Deep relaxation, body awareness, emotional connection. From £200 (1hr) · £400 (2hrs).</p>
         </a>
         <a href="/services/divine-alignment-massage-london/" class="card fade-in">
             <img src="/images/Firefly_GeminiFlash_Use-uploaded-photo-as-EXACT-face-reference--no-changes--no-aging--20---25-.-Slim-profes-417570.png" alt="✦ Massage with Divine Alignment" class="card__image">

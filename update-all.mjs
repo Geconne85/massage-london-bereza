@@ -36,6 +36,13 @@ const themeStyles = `
   body { font-family: var(--font-body); background-color: var(--color-bg); color: var(--color-text); }
   h1, h2, h3, h4, .subtitle { font-family: var(--font-heading); }
   .btn--primary { background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark)); color: var(--color-bg); }
+  @keyframes heroPan {
+    0%   { background-position: 30% 40%; background-size: 115%; }
+    25%  { background-position: 60% 30%; background-size: 110%; }
+    50%  { background-position: 70% 60%; background-size: 120%; }
+    75%  { background-position: 40% 70%; background-size: 112%; }
+    100% { background-position: 30% 40%; background-size: 115%; }
+  }
 </style>`;
 
 // Shared components
@@ -100,7 +107,7 @@ function page(title, desc, canonical, body, schema = '') {
 console.log('Building homepage...');
 const hp = content.homepage || {};
 const homepageBody = `
-  <section class="hero" style="background-image: linear-gradient(rgba(9,7,15,0.65), rgba(9,7,15,0.65)), url('${hp.heroImage}'); background-size: cover; background-position: center;">
+  <section class="hero" style="background-image: linear-gradient(rgba(9,7,15,0.55), rgba(9,7,15,0.55)), url('/images/hero-massage-animated.png'); background-size: 115%; background-position: 30% 40%; animation: heroPan 20s ease-in-out infinite alternate;">
     <div class="container">
       <p class="subtitle">✦ ${esc(hp.heroSubtitle)}</p>
       <h1>${hp.heroTitle}</h1>

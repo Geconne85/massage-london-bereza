@@ -20,6 +20,13 @@
   body { font-family: var(--font-body); background-color: var(--color-bg); color: var(--color-text); }
   h1, h2, h3, h4, .subtitle { font-family: var(--font-heading); }
   .btn--primary { background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark)); color: var(--color-bg); }
+  @keyframes heroPan {
+    0%   { background-position: 30% 40%; background-size: 115%; }
+    25%  { background-position: 60% 30%; background-size: 110%; }
+    50%  { background-position: 70% 60%; background-size: 120%; }
+    75%  { background-position: 40% 70%; background-size: 112%; }
+    100% { background-position: 30% 40%; background-size: 115%; }
+  }
 </style>
   
 </head>
@@ -35,7 +42,7 @@
     <a href="/services/deep-tissue-massage-london/" class="card fade-in">
         <img src="/images/Firefly_GeminiFlash_1--Deep-Tissue-Massage-----Male-client_PROMPT-_Use--REFERENCE-PHOTO-OF-IRYNA--as-STRICT-417570.png" alt="Deep Tissue Massage" class="card__image">
         <h3 class="card__title">Deep Tissue Massage</h3>
-        <p class="card__text">Targeted body-part relief. Neck, back &amp; shoulder tension from desk work. From £90/hr.</p>
+        <p class="card__text">Targeted body-part relief. Neck, back &amp; shoulder tension from desk work. From £120/hr.</p>
         <span class="card__link">Book Now →</span>
     </a>
     <a href="/services/swedish-massage-london/" class="card fade-in">
@@ -59,7 +66,7 @@
     <a href="/services/sensual-massage-london/" class="card fade-in">
         <img src="/images/Firefly_Gemini-Flash_Professional-massage-therapist-woman-in-elegant-white-dress-uniform-performing-slow-g-417570.png" alt="Sensual Massage" class="card__image">
         <h3 class="card__title">Sensual Massage</h3>
-        <p class="card__text">Deep relaxation, body awareness, emotional connection. Fixed price: £200.</p>
+        <p class="card__text">Deep relaxation, body awareness, emotional connection. From £200 (1hr) · £400 (2hrs).</p>
         <span class="card__link">Book Now →</span>
     </a>
     <a href="/services/divine-alignment-massage-london/" class="card fade-in">

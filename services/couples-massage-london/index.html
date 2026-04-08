@@ -20,6 +20,13 @@
   body { font-family: var(--font-body); background-color: var(--color-bg); color: var(--color-text); }
   h1, h2, h3, h4, .subtitle { font-family: var(--font-heading); }
   .btn--primary { background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark)); color: var(--color-bg); }
+  @keyframes heroPan {
+    0%   { background-position: 30% 40%; background-size: 115%; }
+    25%  { background-position: 60% 30%; background-size: 110%; }
+    50%  { background-position: 70% 60%; background-size: 120%; }
+    75%  { background-position: 40% 70%; background-size: 112%; }
+    100% { background-position: 30% 40%; background-size: 115%; }
+  }
 </style>
   
 </head>
