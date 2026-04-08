@@ -13,7 +13,7 @@
     "heroSubtitle": "London's Premier Mobile Massage",
     "heroTitle": "Clinical Massage Therapy, <em>Delivered</em> to Your Door",
     "heroDesc": "Outcome-driven deep tissue, Swedish, hot stone, aromatherapy, sensual & sports massage by Iryna Bereza — 10+ years of clinical experience. Same-day availability across Central London.",
-    "heroImage": "/images/iryna-working.jpg",
+    "heroImage": "/images/hero-massage-3d.png",
     "stats": [
       {
         "number": "10+",
@@ -54,10 +54,8 @@
       "name": "Deep Tissue Massage",
       "slug": "deep-tissue-massage-london",
       "price30": "—",
-      "price60": "£95",
-      "price90": "£135",
-      "price120": "£180",
-      "shortDesc": "Targeted body-part relief. Neck, back & shoulder tension from desk work. £90/hour.",
+      "price60": "£90",
+      "shortDesc": "Targeted body-part relief. Neck, back & shoulder tension from desk work. From £90/hr.",
       "image": "/images/Firefly_GeminiFlash_1--Deep-Tissue-Massage-----Male-client_PROMPT-_Use--REFERENCE-PHOTO-OF-IRYNA--as-STRICT-417570.png"
     },
     {
@@ -98,10 +96,11 @@
       "name": "Sensual Massage",
       "slug": "sensual-massage-london",
       "price30": "—",
-      "price60": "£120",
-      "price90": "£180",
-      "price120": "£240",
-      "shortDesc": "Deep relaxation, body awareness, emotional connection.",
+      "price60": "£200",
+      "price90": "£200",
+      "price120": "£200",
+      "fixedPrice": "£200 — Fixed Price (No Fixed Time)",
+      "shortDesc": "Deep relaxation, body awareness, emotional connection. Fixed price: £200.",
       "image": "/images/Firefly_Gemini-Flash_Professional-massage-therapist-woman-in-elegant-white-dress-uniform-performing-slow-g-417570.png"
     },
     {

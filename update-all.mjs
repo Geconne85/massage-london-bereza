@@ -100,7 +100,7 @@ function page(title, desc, canonical, body, schema = '') {
 console.log('Building homepage...');
 const hp = content.homepage || {};
 const homepageBody = `
-  <section class="hero" style="background-image: linear-gradient(rgba(9,7,15,0.7), rgba(9,7,15,0.7)), url('${hp.heroImage}');">
+  <section class="hero" style="background-image: linear-gradient(rgba(9,7,15,0.65), rgba(9,7,15,0.65)), url('${hp.heroImage}'); background-size: cover; background-position: center;">
     <div class="container">
       <p class="subtitle">✦ ${esc(hp.heroSubtitle)}</p>
       <h1>${hp.heroTitle}</h1>
@@ -126,9 +126,24 @@ const homepageBody = `
         ${(content.services || []).map(svc => `
         <a href="/services/${svc.slug}/" class="card fade-in">
             <img src="${svc.image}" alt="${esc(svc.name)}" class="card__image">
-            <h3 class="card__title">${svc.name.replace('✦ ','')}</h3>
-            <p class="card__text">${esc(svc.shortDesc)} From ${svc.price60 !== '—' ? svc.price60 : svc.price120}.</p>
+            <h3 class="card__title">${svc.name.replace('\u2726 ','')}</h3>
+            <p class="card__text">${esc(svc.shortDesc)}</p>
         </a>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D Professional Massage Showcase -->
+  <section class="section section--cream" style="padding:0;">
+    <div style="position:relative;width:100%;max-height:520px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+      <img src="/images/hero-massage-3d.png" alt="Professional body massage therapy by Iryna Bereza London" style="width:100%;max-height:520px;object-fit:cover;object-position:center;">
+      <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(9,7,15,0.8) 0%,rgba(9,7,15,0.4) 55%,rgba(9,7,15,0) 100%);display:flex;align-items:center;">
+        <div class="container">
+          <p class="subtitle" style="color:var(--color-gold);">✦ Clinical-Grade Therapy</p>
+          <h2 style="max-width:500px;font-size:clamp(1.6rem,4vw,2.5rem);">Professional Body Massage, Delivered to Your Door</h2>
+          <p style="max-width:420px;opacity:0.85;margin-top:1rem;">10+ years of clinical experience. Same-day availability across Shoreditch, Marylebone, Canary Wharf, Kensington, Chelsea, Mayfair &amp; all Central London areas.</p>
+          <a href="/book/" class="btn btn--primary btn--lg" style="margin-top:1.5rem;display:inline-block;">Book Your Session</a>
+        </div>
       </div>
     </div>
   </section>
@@ -217,7 +232,7 @@ console.log('✓ Services Overview');
         `${esc(svc.shortDesc)}`,
         `/services/${svc.slug}/`,
         `<section class="page-hero"><div class="container"><p class="subtitle">Massage Service</p><h1>${svc.name}</h1><p>${esc(svc.shortDesc)}</p></div></section>
-        <section class="section section--white"><div class="container"><div class="grid grid--2" style="align-items:center;"><div class="fade-in-left"><img src="${svc.image}" alt="${esc(svc.name)}" style="width:100%;border-radius:var(--radius-lg);"></div><div class="fade-in-right"><h2>Treatment Details</h2><p style="font-size:var(--fs-body-lg);line-height:var(--lh-relaxed);">${esc(svc.longDesc || svc.shortDesc)}</p><div style="background:var(--color-bg);padding:1.5rem;border-radius:12px;border:1px solid var(--color-gold);margin-top:2rem;"><h3 style="color:var(--color-gold);margin-top:0;">Pricing</h3><p>✦ 1 Hour: <b>${svc.price60}</b><br>✦ 1.5 Hours: <b>${svc.price90}</b><br>✦ 2 Hours: <b>${svc.price120}</b></p><a href="/book/" class="btn btn--primary" style="margin-top:1rem;display:inline-block;">Book This Session</a></div></div></div></div></section>`
+        <section class="section section--white"><div class="container"><div class="grid grid--2" style="align-items:center;"><div class="fade-in-left"><img src="${svc.image}" alt="${esc(svc.name)}" style="width:100%;border-radius:var(--radius-lg);"></div><div class="fade-in-right"><h2>Treatment Details</h2><p style="font-size:var(--fs-body-lg);line-height:var(--lh-relaxed);">${esc(svc.longDesc || svc.shortDesc)}</p><div style="background:var(--color-bg);padding:1.5rem;border-radius:12px;border:1px solid var(--color-gold);margin-top:2rem;"><h3 style="color:var(--color-gold);margin-top:0;">Pricing</h3><p>${svc.fixedPrice ? `✦ Fixed Price: <b>${svc.fixedPrice}</b><br><span style="font-size:0.9em;opacity:0.8;">Immersive relaxation session — No fixed time limit.<br>Duration guided by your body's needs.</span>` : (svc.price60 === '—' ? `✦ Price: <b>${svc.price120}</b><br><span style="font-size:0.9em;opacity:0.8;">No fixed time limit — your body leads.</span>` : `✦ 1 Hour: <b>${svc.price60}</b><br>✦ 1.5 Hours: <b>${svc.price90 || svc.price120}</b><br>✦ 2 Hours: <b>${svc.price120}</b>`)}</p><a href="/book/" class="btn btn--primary" style="margin-top:1rem;display:inline-block;">Book This Session</a></div></div></div></div></section>`
     ));
 });
 
