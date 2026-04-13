@@ -9,6 +9,7 @@ import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
+import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = __dirname;
@@ -128,16 +129,46 @@ app.get('/admin/api/images', (req, res) => {
 });
 
 // Upload image(s)
-app.post('/admin/api/upload', upload.array('images', 20), (req, res) => {
+app.post('/admin/api/upload', upload.array('images', 20), async (req, res) => {
   if (!req.files || req.files.length === 0) return res.status(400).json({ error: 'No files uploaded' });
-  res.json({ ok: true, files: req.files.map(f => f.filename) });
+  let finalFiles = [];
+  try {
+    for (let f of req.files) {
+      const isImg = /\.(jpg|jpeg|png|webp)$/i.test(f.filename);
+      let finalName = f.filename;
+      if (isImg) {
+        finalName = f.filename.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+        const tempPath = path.join(IMG_DIR, 'tmp-' + Math.random() + '.webp');
+        await sharp(f.path).webp({ quality: 82 }).resize({ width: 1400, withoutEnlargement: true }).toFile(tempPath);
+        fs.unlinkSync(f.path);
+        fs.renameSync(tempPath, path.join(IMG_DIR, finalName));
+      }
+      finalFiles.push(finalName);
+    }
+  } catch(e) { console.error('Upload compress error:', e); finalFiles = req.files.map(f=>f.filename); }
+  res.json({ ok: true, files: finalFiles });
 });
 
 // Replace specific image (keep same name)
-app.post('/admin/api/replace/:name', upload.single('image'), (req, res) => {
+app.post('/admin/api/replace/:name', upload.single('image'), async (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file' });
   const targetPath = path.join(IMG_DIR, req.params.name);
-  fs.renameSync(req.file.path, targetPath);
+  try {
+    const isImg = /\.(jpg|jpeg|png|webp)$/i.test(req.params.name);
+    if(isImg) {
+      const tempPath = path.join(IMG_DIR, 'tmp-' + Math.random() + '.webp');
+      await sharp(req.file.path).webp({ quality: 82 }).resize({ width: 1400, withoutEnlargement: true }).toFile(tempPath);
+      fs.unlinkSync(req.file.path);
+      if(fs.existsSync(targetPath)) fs.unlinkSync(targetPath);
+      fs.renameSync(tempPath, targetPath);
+    } else {
+      if(fs.existsSync(targetPath)) fs.unlinkSync(targetPath);
+      fs.renameSync(req.file.path, targetPath);
+    }
+  } catch (e) {
+    if(fs.existsSync(targetPath)) fs.unlinkSync(targetPath);
+    fs.renameSync(req.file.path, targetPath);
+  }
   res.json({ ok: true, filename: req.params.name });
 });
 
@@ -190,11 +221,11 @@ app.post('/admin/api/page-html', (req, res) => {
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
-// Publish — rebuild all static files
+// Publish — rebuild all static files and auto-deploy
 app.post('/admin/api/publish', (req, res) => {
   try {
-    execSync('npm run build', { cwd: ROOT, timeout: 60000, stdio: 'pipe' });
-    res.json({ ok: true, message: 'Site rebuilt successfully! Now push to GitHub to go live.' });
+    execSync('npm run build && git add . && git commit -m "Auto-deploy via Admin Panel" && git push origin main', { cwd: ROOT, timeout: 120000, stdio: 'pipe' });
+    res.json({ ok: true, message: 'Site rebuilt and deployed live successfully! Changes will appear in ~1 minute.' });
   } catch (e) {
     res.status(500).json({ error: e.stderr?.toString() || e.message });
   }
@@ -344,8 +375,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
     <div class="sidebar-group">Content</div>
     <button class="nav-item" data-panel="homepage" onclick="nav(this)">🏠 Homepage</button>
+    <button class="nav-item" data-panel="sections" onclick="nav(this)">📰 Text Content</button>    
     <button class="nav-item" data-panel="services" onclick="nav(this)">💆 Services</button>
     <button class="nav-item" data-panel="pricing" onclick="nav(this)">💰 Pricing</button>
+    <button class="nav-item" data-panel="reviews" onclick="nav(this)">⭐ Reviews</button>
     <button class="nav-item" data-panel="about" onclick="nav(this)">👤 About</button>
     <button class="nav-item" data-panel="faq" onclick="nav(this)">❓ FAQ</button>
     <button class="nav-item" data-panel="popup" onclick="nav(this)">💎 Popup</button>
@@ -409,6 +442,34 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
       <button class="btn btn-gold" onclick="saveSection('about')">💾 Save</button>
     </div>
 
+    <!-- SECTIONS -->
+    <div class="panel" id="panel-sections">
+      <div class="page-title">📰 Text Content <span>· 3D showcase & other text blocks</span></div>
+      <div id="sectionsFields">Loading…</div>
+      <button class="btn btn-gold" onclick="saveSection('sections')">💾 Save Text Content</button>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="panel" id="panel-reviews">
+      <div class="page-title">⭐ Reviews <span>· edit client testimonials</span></div>
+      <div id="reviewsFields">Loading…</div>
+      <button class="btn btn-gold" onclick="saveSection('reviews')">💾 Save Reviews</button>
+    </div>
+
+    <!-- FAQ -->
+    <div class="panel" id="panel-faq">
+      <div class="page-title">❓ FAQ <span>· edit questions and answers</span></div>
+      <div id="faqFields">Loading…</div>
+      <button class="btn btn-gold" onclick="saveSection('faq')">💾 Save FAQ</button>
+    </div>
+
+    <!-- POPUP -->
+    <div class="panel" id="panel-popup">
+      <div class="page-title">💎 Popup <span>· edit dynamic popup</span></div>
+      <div id="popupFields">Loading…</div>
+      <button class="btn btn-gold" onclick="saveSection('popup')">💾 Save Popup</button>
+    </div>
+
     <!-- DESIGN -->
     <div class="panel" id="panel-design">
       <div class="page-title">🎨 Theme Colors <span>· personalize your brand</span></div>
@@ -445,24 +506,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
       <div class="page-title">🚀 Deploy to Live Website</div>
       <div class="grid2">
         <div class="card">
-          <div class="card-title">Step 1 — Build Files</div>
-          <p style="color:var(--muted);font-size:.82rem;line-height:1.7;margin-bottom:1rem">Click Publish Live to save your CMS changes into the final website files.</p>
+          <div class="card-title">Step 1 — Auto Deploy</div>
+          <p style="color:var(--muted);font-size:.82rem;line-height:1.7;margin-bottom:1rem">Click Publish Live to save your CMS changes, rebuild files, and deploy live directly to Vercel.</p>
           <button class="btn btn-green" onclick="doPublish()" style="width:100%">⚡ Publish Live</button>
         </div>
-        <div class="card">
-          <div class="card-title">Step 2 — Push to GitHub</div>
-          <p style="color:var(--muted);font-size:.82rem;line-height:1.7;margin-bottom:.7rem">Open a new Terminal or Command Prompt and paste these exact commands to send your files to <b>massage-london-bereza</b>:</p>
-          <div style="background:var(--bg);padding:.8rem;border-radius:6px;font-family:monospace;font-size:.78rem;line-height:1.9;color:var(--gold);user-select:all;cursor:pointer;">
-            cd "C:\\Users\\diyan\\Downloads\\calypso-heaven-santorini (1)"<br>
-            git add .<br>
-            git commit -m "Update from CMS"<br>
-            git push origin main
-          </div>
-        </div>
         <div class="card" style="grid-column:1/-1;">
-          <div class="card-title">Step 3 — Vercel Auto-Deploy</div>
+          <div class="card-title">Step 2 — Vercel Processing</div>
           <p style="color:var(--muted);font-size:.85rem;line-height:1.7">
-            Once you run the <code style="color:var(--gold)">git push</code> command above, Vercel will automatically detect the changes.<br><br>
+            Deployment takes care of itself automatically.<br><br>
             ⏳ Wait 1-2 minutes, then check your live site:<br>
             <a href="https://massage-london-bereza.vercel.app" target="_blank" style="color:#27ae60;font-weight:bold;text-decoration:none;font-size:1rem;">👉 View Live Website (massage-london-bereza.vercel.app)</a><br><br>
             Check deployment status here: <a href="https://vercel.com/geconne85s-projects/massage-london-bereza/" target="_blank" style="color:var(--gold)">Vercel Dashboard</a>
@@ -513,8 +564,10 @@ async function loadContent() {
   
   // Wrapped in safe functions to prevent total crash
   safeRender(renderHomepage, 'homepage');
+  safeRender(renderSections, 'sections');
   safeRender(renderServices, 'services');
   safeRender(renderPricing, 'pricing');
+  safeRender(renderReviews, 'reviews');
   safeRender(renderAbout, 'about');
   safeRender(renderFaq, 'faq');
   safeRender(renderPopup, 'popup');
@@ -714,6 +767,13 @@ function saveSection(sec) {
         if (el && el.value) content.trustbar.items.push(el.value);
     }
   }
+  if (sec === 'sections') {
+    content.sections = content.sections || {};
+    ['3dsub','3dtitle','3ddesc','3dimg','hiwsub','hiwtitle','hiw1','hiw2','hiw3','hiw4','svcsub','svctitle','revsub','revtitle','ctasub','ctatitle'].forEach(f => {
+      const el = document.getElementById('ts_' + f);
+      if (el) content.sections[f] = el.value;
+    });
+  }
   saveFullContent();
 }
 
@@ -796,6 +856,72 @@ function renderAbout() {
         <div class="field"><label>Bio (Para 2)</label><textarea id="ab_bio2" rows="5">\${esc(a.bio2||'')}</textarea></div>
       </div>
     </div>\`;
+}
+
+// ---- Text Sections ----
+function renderSections() {
+  const ts = content.sections || {};
+  document.getElementById('sectionsFields').innerHTML = \`
+    <div class="grid2">
+      <div class="card"><div class="card-title">3D Showcase</div>
+        <div class="field"><label>Subtitle</label><input id="ts_3dsub" value="\${esc(ts.showcaseSubtitle||'✦ Clinical-Grade Therapy')}"></div>
+        <div class="field"><label>Title</label><input id="ts_3dtitle" value="\${esc(ts.showcaseTitle||'Professional Body Massage, Delivered to Your Door')}"></div>
+        <div class="field"><label>Description</label><textarea id="ts_3ddesc" rows="3">\${esc(ts.showcaseDesc||'10+ years of clinical experience. Same-day availability across Shoreditch, Marylebone, Canary Wharf, Kensington, Chelsea, Mayfair & all Central London areas.')}</textarea></div>
+        <div class="field"><label>Image Path</label><input id="ts_3dimg" value="\${esc(ts.showcaseImg||'/images/hero-massage-3d.png')}"></div>
+      </div>
+      <div class="card"><div class="card-title">How It Works</div>
+        <div class="field"><label>Subtitle</label><input id="ts_hiwsub" value="\${esc(ts.hiwSubtitle||'How It Works')}"></div>
+        <div class="field"><label>Title</label><input id="ts_hiwtitle" value="\${esc(ts.hiwTitle||'Your Session in 4 Steps')}"></div>
+        <div class="field"><label>Step 1 Text</label><input id="ts_hiw1" value="\${esc(ts.hiw1||'WhatsApp 447704503507 or book online.')}"></div>
+        <div class="field"><label>Step 2 Text</label><input id="ts_hiw2" value="\${esc(ts.hiw2||'Iryna arrives with organic oils & linens.')}"></div>
+        <div class="field"><label>Step 3 Text</label><input id="ts_hiw3" value="\${esc(ts.hiw3||'Focus on your specific tension areas.')}"></div>
+        <div class="field"><label>Step 4 Text</label><input id="ts_hiw4" value="\${esc(ts.hiw4||'Feel immediate physical and mental reset.')}"></div>
+      </div>
+      <div class="card"><div class="card-title">Services & Testimonials Headers</div>
+        <div class="field"><label>Services Subtitle</label><input id="ts_svcsub" value="\${esc(ts.svcSubtitle||'Our Services')}"></div>
+        <div class="field"><label>Services Title</label><input id="ts_svctitle" value="\${esc(ts.svcTitle||'Specialist Treatments')}"></div>
+        <div class="field"><label>Reviews Subtitle</label><input id="ts_revsub" value="\${esc(ts.revSubtitle||'Testimonials')}"></div>
+        <div class="field"><label>Reviews Title</label><input id="ts_revtitle" value="\${esc(ts.revTitle||'Client Experiences')}"></div>
+      </div>
+      <div class="card"><div class="card-title">CTA Section</div>
+        <div class="field"><label>Subtitle</label><input id="ts_ctasub" value="\${esc(ts.ctaSubtitle||'Ready to Begin?')}"></div>
+        <div class="field"><label>Title</label><input id="ts_ctatitle" value="\${esc(ts.ctaTitle||'Book Your Session Today')}"></div>
+      </div>
+    </div>\`;
+}
+
+// ---- Reviews ----
+function renderReviews() {
+  const revs = content.reviews || [];
+  document.getElementById('reviewsFields').innerHTML = \`
+    <button class="btn btn-outline btn-sm" onclick="addRev()" style="margin-bottom:1rem">+ Add Review</button>
+    \${revs.map((r, i) => \`
+    <div class="card" id="rev\${i}">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
+        <div class="card-title" style="margin:0">\${esc(r.name||'Client')}</div>
+        <button class="btn btn-red btn-sm" onclick="delRev(\${i})">Delete</button>
+      </div>
+      <div class="field"><label>Name</label><input value="\${esc(r.name||'')}" onchange="updRev(\${i},'name',this.value)"></div>
+      <div class="field"><label>Location/Service</label><input value="\${esc(r.location||'')}" onchange="updRev(\${i},'location',this.value)"></div>
+      <div class="field"><label>Review Text</label><textarea rows="2" onchange="updRev(\${i},'text',this.value)">\${esc(r.text||'')}</textarea></div>
+    </div>\`).join('')}\`;
+}
+async function updRev(i, field, val) {
+  content.reviews[i][field] = val;
+  await patch('reviews.' + i + '.' + field, val);
+}
+async function addRev() {
+  if (!content.reviews) content.reviews = [];
+  content.reviews.unshift({ name: 'New Client', location: 'London', text: 'Great massage!' });
+  await saveFullContent();
+  renderReviews();
+}
+async function delRev(i) {
+  if (!confirm('Delete this review?')) return;
+  content.reviews.splice(i, 1);
+  await saveFullContent();
+  renderReviews();
+  toast('🗑 Deleted');
 }
 
 // ---- FAQ ----

@@ -107,6 +107,7 @@ function page(title, desc, canonical, body, schema = '') {
 // ============ HOMEPAGE ============
 console.log('Building homepage...');
 const hp = content.homepage || {};
+const ts = content.sections || {};
 const homepageBody = `
   <section class="hero" style="background-image: linear-gradient(rgba(9,7,15,0.55), rgba(9,7,15,0.55)), url('/images/hero-massage-animated.png'); background-size: 115%; background-position: 30% 40%; animation: heroPan 20s ease-in-out infinite alternate;">
     <div class="container">
@@ -129,7 +130,7 @@ const homepageBody = `
 
   <section class="section section--white">
     <div class="container">
-      <div class="section-header fade-in"><p class="subtitle">Our Services</p><h2>Specialist Treatments</h2><p>Personalised therapeutic massage delivered to your door.</p></div>
+      <div class="section-header fade-in"><p class="subtitle">${esc(ts.svcSubtitle||'Our Services')}</p><h2>${esc(ts.svcTitle||'Specialist Treatments')}</h2><p>Personalised therapeutic massage delivered to your door.</p></div>
       <div class="grid grid--3">
         ${(content.services || []).map(svc => `
         <a href="/services/${svc.slug}/" class="card fade-in">
@@ -144,12 +145,12 @@ const homepageBody = `
   <!-- 3D Professional Massage Showcase -->
   <section class="section section--cream" style="padding:0;">
     <div style="position:relative;width:100%;max-height:520px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
-      <img src="/images/hero-massage-3d.png" alt="Professional body massage therapy by Iryna Bereza London" style="width:100%;max-height:520px;object-fit:cover;object-position:center;">
+      <img src="${esc(ts.showcaseImg||'/images/hero-massage-3d.png')}" alt="Professional body massage therapy by Iryna Bereza London" style="width:100%;max-height:520px;object-fit:cover;object-position:center;">
       <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(9,7,15,0.8) 0%,rgba(9,7,15,0.4) 55%,rgba(9,7,15,0) 100%);display:flex;align-items:center;">
         <div class="container">
-          <p class="subtitle" style="color:var(--color-gold);">✦ Clinical-Grade Therapy</p>
-          <h2 style="max-width:500px;font-size:clamp(1.6rem,4vw,2.5rem);">Professional Body Massage, Delivered to Your Door</h2>
-          <p style="max-width:420px;opacity:0.85;margin-top:1rem;">10+ years of clinical experience. Same-day availability across Shoreditch, Marylebone, Canary Wharf, Kensington, Chelsea, Mayfair &amp; all Central London areas.</p>
+          <p class="subtitle" style="color:var(--color-gold);">${esc(ts.showcaseSubtitle||'✦ Clinical-Grade Therapy')}</p>
+          <h2 style="max-width:500px;font-size:clamp(1.6rem,4vw,2.5rem);">${esc(ts.showcaseTitle||'Professional Body Massage, Delivered to Your Door')}</h2>
+          <p style="max-width:420px;opacity:0.85;margin-top:1rem;">${esc(ts.showcaseDesc||'10+ years of clinical experience. Same-day availability across Shoreditch, Marylebone, Canary Wharf, Kensington, Chelsea, Mayfair & all Central London areas.')}</p>
           <a href="/book/" class="btn btn--primary btn--lg" style="margin-top:1.5rem;display:inline-block;">Book Your Session</a>
         </div>
       </div>
@@ -158,19 +159,19 @@ const homepageBody = `
 
   <section class="section section--cream">
     <div class="container">
-      <div class="section-header fade-in"><p class="subtitle">How It Works</p><h2>Your Session in 4 Steps</h2></div>
+      <div class="section-header fade-in"><p class="subtitle">${esc(ts.hiwSubtitle||'How It Works')}</p><h2>${esc(ts.hiwTitle||'Your Session in 4 Steps')}</h2></div>
       <div class="grid grid--4">
-        <div class="card fade-in" style="text-align:center;"><div class="card__icon">📱</div><h4 class="card__title">1. Book</h4><p class="card__text">WhatsApp ${s.phone} or book online.</p></div>
-        <div class="card fade-in" style="text-align:center;"><div class="card__icon">🏠</div><h4 class="card__title">2. We Arrive</h4><p class="card__text">Iryna arrives with organic oils & linens.</p></div>
-        <div class="card fade-in" style="text-align:center;"><div class="card__icon">💆</div><h4 class="card__title">3. Treatment</h4><p class="card__text">Focus on your specific tension areas.</p></div>
-        <div class="card fade-in" style="text-align:center;"><div class="card__icon">✨</div><h4 class="card__title">4. Relief</h4><p class="card__text">Feel immediate physical and mental reset.</p></div>
+        <div class="card fade-in" style="text-align:center;"><div class="card__icon">📱</div><h4 class="card__title">1. Book</h4><p class="card__text">${esc(ts.hiw1||'WhatsApp 447704503507 or book online.')}</p></div>
+        <div class="card fade-in" style="text-align:center;"><div class="card__icon">🏠</div><h4 class="card__title">2. We Arrive</h4><p class="card__text">${esc(ts.hiw2||'Iryna arrives with organic oils & linens.')}</p></div>
+        <div class="card fade-in" style="text-align:center;"><div class="card__icon">💆</div><h4 class="card__title">3. Treatment</h4><p class="card__text">${esc(ts.hiw3||'Focus on your specific tension areas.')}</p></div>
+        <div class="card fade-in" style="text-align:center;"><div class="card__icon">✨</div><h4 class="card__title">4. Relief</h4><p class="card__text">${esc(ts.hiw4||'Feel immediate physical and mental reset.')}</p></div>
       </div>
     </div>
   </section>
 
   <section class="section section--white">
     <div class="container">
-      <div class="section-header fade-in"><p class="subtitle">Testimonials</p><h2>Client Experiences</h2></div>
+      <div class="section-header fade-in"><p class="subtitle">${esc(ts.revSubtitle||'Testimonials')}</p><h2>${esc(ts.revTitle||'Client Experiences')}</h2></div>
       <div class="grid grid--3">
         ${(content.reviews || []).slice(0, 3).map(rev => `
         <div class="testimonial fade-in"><div class="testimonial__stars">★★★★★</div><p class="testimonial__text">"${esc(rev.text)}"</p><div class="testimonial__author"><div class="testimonial__avatar">${rev.name.substring(0,1)}</div><div><div class="testimonial__name">${esc(rev.name)}</div><div class="testimonial__location">${esc(rev.location)}</div></div></div></div>
@@ -181,8 +182,8 @@ const homepageBody = `
 
   <section class="cta-section">
     <div class="container">
-      <p class="subtitle">Ready to Begin?</p>
-      <h2>Book Your Session Today</h2>
+      <p class="subtitle">${esc(ts.ctaSubtitle||'Ready to Begin?')}</p>
+      <h2>${esc(ts.ctaTitle||'Book Your Session Today')}</h2>
       <p>Mobile clinical massage in Central London. Open ${s.hours}.</p>
       <div style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap;">
         <a href="/book/" class="btn btn--primary btn--lg">Book Now</a>
