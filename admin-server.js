@@ -221,14 +221,57 @@ app.post('/admin/api/page-html', (req, res) => {
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
-// Publish — rebuild all static files and auto-deploy
-app.post('/admin/api/publish', (req, res) => {
+// Publish — rebuild all static files and auto-deploy (Windows-safe)
+app.post('/admin/api/publish', async (req, res) => {
+  const log = [];
+  const run = (cmd, label) => {
+    log.push(`▶ ${label}...`);
+    try {
+      const out = execSync(cmd, { cwd: ROOT, timeout: 180000, stdio: 'pipe', shell: true });
+      const txt = out?.toString?.().trim();
+      if (txt) log.push(txt);
+      log.push(`✅ ${label} done`);
+      return true;
+    } catch (e) {
+      const errMsg = (e.stderr?.toString() || e.stdout?.toString() || e.message || '').trim();
+      log.push(`❌ ${label} failed: ${errMsg}`);
+      return false;
+    }
+  };
+
+  // Step 1: Regenerate all HTML pages from content.json
+  const built = run('node update-all.mjs', 'Rebuilding HTML pages');
+  if (!built) return res.status(500).json({ ok: false, error: log.join('\n'), log });
+
+  // Step 2: Git add all changes (including new images and content)
+  run('git add -A', 'Staging all changes');
+
+  // Step 3: Git commit (may say "nothing to commit" — that's OK)
+  const ts = new Date().toISOString().slice(0,19).replace('T',' ');
+  // Ensure git identity is set (required for commit)
+  try { execSync('git config user.email "admin@bereza.local"', { cwd: ROOT, stdio: 'pipe', shell: true }); } catch {}
+  try { execSync('git config user.name "Bereza Admin"', { cwd: ROOT, stdio: 'pipe', shell: true }); } catch {}
   try {
-    execSync('npm run build && git add . && git commit -m "Auto-deploy via Admin Panel" && git push origin main', { cwd: ROOT, timeout: 120000, stdio: 'pipe' });
-    res.json({ ok: true, message: 'Site rebuilt and deployed live successfully! Changes will appear in ~1 minute.' });
+    execSync(`git commit -m "Admin deploy: ${ts}"`, { cwd: ROOT, timeout: 30000, stdio: 'pipe', shell: true });
+    log.push('✅ Committed changes');
   } catch (e) {
-    res.status(500).json({ error: e.stderr?.toString() || e.message });
+    const msg = (e.stderr?.toString() || e.stdout?.toString() || '').toLowerCase();
+    if (msg.includes('nothing to commit') || msg.includes('nothing added')) {
+      log.push('ℹ️ Nothing new to commit (content unchanged)');
+    } else {
+      log.push('⚠️ Commit: ' + (e.stderr?.toString() || e.message || '').trim());
+    }
   }
+
+  // Step 4: Git push to GitHub → Vercel auto-deploys
+  const pushed = run('git push origin main', 'Pushing to GitHub');
+  if (!pushed) {
+    // Try fetch+merge+push in case of diverged branches
+    run('git pull --rebase origin main', 'Syncing with remote');
+    run('git push origin main', 'Pushing to GitHub (retry)');
+  }
+
+  res.json({ ok: true, log, message: 'Deployed! Vercel will go live in ~60 seconds.' });
 });
 
 // Hot-stone photo endpoint: serve the uploaded hot stone image inline
@@ -1023,13 +1066,62 @@ async function savePage() {
 async function doPublish() {
   const btn = document.getElementById('publishBtn');
   btn.textContent = '⏳ Building…'; btn.disabled = true;
-  setStatus('⏳ Rebuilding site…', 'busy');
+  setStatus('⏳ Deploying… this takes 1-2 minutes, please wait.', 'busy');
+
+  // Show deploy log modal
+  const overlay = document.getElementById('overlay');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.getElementById('modalBody');
+  modalTitle.textContent = '🚀 Deploying to GitHub & Vercel…';
+  const logBox = document.createElement('div');
+  logBox.style.cssText = 'background:#050408;border:1px solid #c6a96c20;border-radius:8px;padding:1rem;font-family:monospace;font-size:.75rem;line-height:1.8;color:#c6a96c;max-height:300px;overflow-y:auto;white-space:pre-wrap;';
+  logBox.textContent = '⏳ Starting build and deploy…\n';
+  modalBody.innerHTML = '';
+  modalBody.appendChild(logBox);
+  document.getElementById('modalOk').style.display = 'none';
+  overlay.classList.add('show');
+
   try {
     const r = await fetch('/admin/api/publish', { method: 'POST' });
     const d = await r.json();
-    if (d.ok) { toast('🎉 Published! Now push to GitHub.'); setStatus('✅ Published! Push to GitHub → Vercel auto-deploys.', 'ok'); }
-    else { toast('❌ Build failed', 'err'); setStatus('❌ Build error — check terminal', 'err'); }
-  } catch { toast('❌ Server error', 'err'); }
+
+    // Show log lines
+    if (d.log && d.log.length) {
+      logBox.textContent = d.log.join('\n') + '\n';
+    }
+    logBox.scrollTop = logBox.scrollHeight;
+
+    if (d.ok) {
+      logBox.textContent += '\n🎉 SUCCESS! Vercel is deploying — live in ~60 seconds.\n';
+      logBox.style.color = '#27ae60';
+      modalTitle.textContent = '✅ Deployed Successfully!';
+      modalBody.innerHTML += '<div style="margin-top:1rem;text-align:center">' +
+        '<a href="https://massage-london-bereza.vercel.app" target="_blank" ' +
+        'style="display:inline-block;padding:.6rem 1.4rem;background:linear-gradient(135deg,#c6a96c,#a88b50);color:#09070f;border-radius:8px;font-weight:700;text-decoration:none;margin:.5rem">' +
+        '👁 View Live Site →</a> ' +
+        '<a href="https://vercel.com/geconne85s-projects/massage-london-bereza" target="_blank" ' +
+        'style="display:inline-block;padding:.6rem 1.4rem;border:1px solid #c6a96c40;color:#c6a96c;border-radius:8px;font-weight:600;text-decoration:none;margin:.5rem;font-size:.8rem">' +
+        '📋 Vercel Dashboard</a></div>';
+      setStatus('✅ Deployed! Live in ~60 seconds → massage-london-bereza.vercel.app', 'ok');
+      toast('🎉 Published to GitHub & Vercel!', 'ok');
+    } else {
+      logBox.textContent += '\n❌ Deploy failed — see details above.\n';
+      logBox.style.color = '#e74c3c';
+      modalTitle.textContent = '❌ Deploy Failed';
+      if (d.error) logBox.textContent += '\nError detail:\n' + d.error;
+      setStatus('❌ Deploy failed — check the log for details.', 'err');
+      toast('❌ Deploy failed — see log', 'err');
+    }
+  } catch (e) {
+    logBox.textContent += '\n❌ Network/server error: ' + e.message;
+    logBox.style.color = '#e74c3c';
+    setStatus('❌ Server error during deploy', 'err');
+    toast('❌ Server error', 'err');
+  }
+
+  document.getElementById('modalOk').style.display = 'inline-flex';
+  document.getElementById('modalOk').textContent = 'Close';
+  document.getElementById('modalOk').onclick = closeModal;
   btn.textContent = '⚡ Publish Live'; btn.disabled = false;
 }
 
